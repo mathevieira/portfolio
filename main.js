@@ -53,7 +53,7 @@ planets.push(createPlanet(0.9, 35, 'img/neptune.png', 0.002)); // Netuno
 const ambientLight = new THREE.AmbientLight(0x404040); 
 scene.add(ambientLight);
 
-const starTexture = textureLoader.load('circle.png');
+const starTexture = textureLoader.load('img/circle.png');
 
 //Função para criar uma estrela
 function createStar() {
