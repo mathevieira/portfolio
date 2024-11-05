@@ -44,14 +44,14 @@ function createPlanet(size, distance, texturePath, speed) {
 }
 
 // Criando os planetas com suas respectivas texturas
-planets.push(createPlanet(0.4, 5, 'mercury.png', 0.04)); // Mercúrio
-planets.push(createPlanet(0.7, 7, 'venus.png', 0.03)); // Vênus
-planets.push(createPlanet(1, 10, 'earth.png', 0.02)); // Terra
-planets.push(createPlanet(0.5, 12, 'mars.png', 0.018)); // Marte
-planets.push(createPlanet(1.5, 20, 'jupiter.png', 0.008)); // Júpiter
-planets.push(createPlanet(1.2, 25, 'saturn.png', 0.006)); // Saturno
-planets.push(createPlanet(1, 30, 'uranus.png', 0.004)); // Urano
-planets.push(createPlanet(0.9, 35, 'neptune.png', 0.002)); // Netuno
+planets.push(createPlanet(0.4, 5, 'img/mercury.png', 0.04)); // Mercúrio
+planets.push(createPlanet(0.7, 7, 'img/venus.png', 0.03)); // Vênus
+planets.push(createPlanet(1, 10, 'img/earth.png', 0.02)); // Terra
+planets.push(createPlanet(0.5, 12, 'img/mars.png', 0.018)); // Marte
+planets.push(createPlanet(1.5, 20, 'img/jupiter.png', 0.008)); // Júpiter
+planets.push(createPlanet(1.2, 25, 'img/saturn.png', 0.006)); // Saturno
+planets.push(createPlanet(1, 30, 'img/uranus.png', 0.004)); // Urano
+planets.push(createPlanet(0.9, 35, 'img/neptune.png', 0.002)); // Netuno
 
 // Adiciona luz ambiente para suavizar a aparência
 const ambientLight = new THREE.AmbientLight(0x404040); 
