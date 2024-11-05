@@ -1,0 +1,294 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    font-family: 'Space Mono', monospace;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    z-index: 2;
+}
+
+#navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+#navbar li {
+    margin: 0 15px;
+}
+
+#navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+#navbar a:hover {
+    color: #ffcc00; /* Cor do hover */
+}
+
+#planet-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#portfolio-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    text-align: center;
+    padding: 20px;
+    opacity: 0; /* Começa transparente */
+    animation: fadeIn 3s forwards; /* Efeito de transição */
+    /* Para evitar que o conteúdo apareça antes de ser visualizado */
+    animation-delay: 0.5s; /* Ajuste conforme necessário */
+}
+
+#demo-content {
+    margin-top: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    z-index: 1;
+    background: rgba(255, 0, 0, 0);
+    color: white;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* Totalmente transparente */
+    }
+    100% {
+        opacity: 1; /* Totalmente opaco */
+    }
+}
+
+#change-about{
+    background-color: #00ff00;
+    color: black;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* Limitar a largura máxima */
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 2em;
+    margin: 20px 0 10px 0;
+}
+
+p {
+    margin: 10px 0;
+    max-width: 600px;
+}
+
+section {
+    background: rgba(0, 0, 0, 0.363);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px;
+    flex: 1; /* Permitir que as seções se expandam igualmente */
+    transition: transform 0.3s;
+}
+
+section:hover {
+    
+}
+
+
+.terminal-container {
+    background-color: #1e1e1e;
+    color: #00ff00;
+    padding: 10px;
+    width: 90%;
+    height: 300px;
+    overflow-y: auto;
+    border-radius: 5px;
+    font-family: monospace;
+}
+
+#output {
+    text-align: left; /* Alinha o texto à esquerda */
+    width: 100%;      /* Garante que o output ocupe toda a largura */
+}
+
+.input-container {
+    display: flex;
+    align-items: center; /* Alinha o input e o prompt na mesma linha */
+    justify-content: center; /* Se você quiser que o input permaneça centralizado */
+}
+
+.prompt {
+    margin-right: 5px;
+}
+
+#command-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #00ff00;
+    outline: none;
+    font-family: monospace;
+}
+
+
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+button {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajusta o número de colunas conforme o espaço disponível */
+    gap: 20px; /* Espaçamento entre os vídeos */
+    padding: 20px;
+    justify-items: center; /* Centraliza os vídeos na coluna */
+}
+
+#demo-content iframe {
+    width: 100%; /* Faz com que o iframe ocupe toda a largura da célula */
+    max-width: 560px; /* Define um limite para que o vídeo não ultrapasse o tamanho original */
+    height: 315px; /* Define a altura proporcional */
+}
+
+
+
+#fotos {
+    padding: 20px;
+    background-color: rgba(30, 30, 30, 0.8); /* Fundo escuro semi-transparente */
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.album-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Tamanho mínimo das fotos */
+    gap: 15px; /* Espaço entre as fotos */
+    max-height: 300px; /* Altura máxima do álbum */
+    overflow: auto; /* Adiciona rolagem se necessário */
+}
+
+.photo {
+    overflow: hidden; /* Garante que a imagem não ultrapasse o contêiner */
+    border-radius: 8px; /* Bordas arredondadas nas fotos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    max-height: 40px; /* Altura fixa para cada foto */
+}
+
+.photo img {
+    width: 100%; /* Imagem ocupa 100% do contêiner */
+    height: 100%; /* Ajusta a altura da imagem */
+    object-fit: cover; /* Mantém a proporção da imagem */
+    transition: transform 0.3s; /* Efeito de transição ao passar o mouse */
+}
+
+.photo img:hover {
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+
+.modal {
+    display: none; /* Inicialmente oculto */
+    position: fixed; /* Fica fixo na tela */
+    z-index: 1000; /* Em cima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ocupa toda a tela */
+    height: 100%;
+    overflow: auto; /* Permite rolagem se necessário */
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro */
+    display: flex; /* Habilita flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.modal-content-container {
+    position: relative; /* Permite que o botão flutue sobre a imagem */
+}
+
+.modal-content {
+    margin: 0; /* Remove margens */
+    display: block;
+    width: 80%; /* Limita a largura da imagem */
+    max-width: 700px; /* Largura máxima da imagem */
+    border-radius: 8px; /* Bordas arredondadas para o conteúdo do modal */
+}
+
+.close {
+    position: absolute; /* Coloca o botão fechar sobre a imagem */
+    top: 20px; /* Distância do topo */
+    right: 20px; /* Distância da direita */
+    color: RED;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    z-index: 1001; /* Garante que o botão está acima da imagem */
+}
+
+
+#about {
+    color: greenyellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio de Matheus Vieira Gonçalves</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav id="navbar">
+        <ul>
+            <li><a id="home-link" href="#">Home</a></li>
+            <li><a id="demo-link" href="#">Vídeos</a></li>
+            <li><a id="teach-link" href="#">Projetos</a></li>
+            <li><a id="contact-link" href="#">Contato</a></li>
+            <li><a id="sistema-link" href="#">Sistema Solar</a></li>
+        </ul>
+    </nav>
+
+    <div id="planet-container"></div>
+    <div id="portfolio-content">
+        <div style=""></div>
+
+        <div class="content-wrapper">
+            <section id="about" style="color: greenyellow;">
+                <h2>Sobre Mim <i class="fas fa-user"></i></h2>
+                <img src="MATHEUS.jpeg" alt="Foto de Matheus" style="border-radius: 50%; max-width: 150px;">
+                <p id="about-text"> Especialista em
+                    segurança ofensiva e criador de conteúdos sobre
+                    segurança da informação.</p>
+                <button id="change-about">Clique aqui para ler mais...</button>
+            </section>
+
+            <!-- <section id="terminal">
+                <h2>Terminal <i class="fas fa-cogs"></i></h2>
+                <div class="terminal-container">
+                    <div id="output"></div>
+                    <div class="input-container">
+                        <span class="prompt">$</span>
+                        <input type="text" id="command-input" autofocus />
+                    </div>
+                </div>
+                <button id="ok-terminal">Ok</button>
+            </section> -->
+        </div>
+
+        <div class="content-wrapper">
+<!-- Estrutura HTML para o álbum de fotos -->
+<section id="fotos">
+    <h2>Álbum de Fotos <i class="fas fa-folder-open"></i></h2>
+    <div class="album-container">
+        <div class="photo" onclick="openModal(this)">
+            <img src="MATHEUS.jpeg" alt="Foto 1" style="width: 100%; max-height: 300px; object-fit: cover;">
+        </div>
+        <div class="photo" onclick="openModal(this)">
+            <img src="MATHEUS.jpeg" alt="Foto 2" style="width: 100%; max-height: 300px; object-fit: cover;">
+        </div>
+        <div class="photo" onclick="openModal(this)">
+            <img src="MATHEUS.jpeg" alt="Foto 3" style="width: 100%; max-height: 300px; object-fit: cover;">
+        </div>
+        <!-- Adicione mais fotos aqui -->
+    </div>
+</section>
+
+<!-- Modal para exibir a foto em tamanho maior -->
+<div id="myModal" class="modal" style="display: none;"> <!-- Inicialmente oculto -->
+    <div class="modal-content-container">
+        <img class="modal-content" id="modalImage" alt="Imagem ampliada">
+        <span class="close" onclick="closeModal()">&times;</span> <!-- Botão de fechar -->
+    </div>
+</div>
+
+            <section id="controls">
+                <h2>Controles <i class="fas fa-sliders-h"></i></h2>
+                <button id="toggle-gravity">Ativar Gravidade</button>
+                <button id="toggle-rotation">Parar Rotação</button>
+                <button id="reset-camera">Resetar Câmera</button>
+                <button id="increase-speed">Acelerar Rotação</button>
+                <button id="decrease-speed">Desacelerar Rotação</button>
+                <button id="go-to-earth">Ir para a Terra</button>
+                <button id="go-to-test">Ir para outro lugar</button>
+                <button id="go-to-test2">Novamente</button>
+            </section>
+        </div>
+
+
+
+
+    </div>
+    <div id="demo-content" style="display: none;">
+        <h2>Vídeos</h2>
+        <p></p>
+
+        <div class="video-grid">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/_pl1MhRGOHU?si=sENYHnISBlIzUsJC"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/_pl1MhRGOHU?si=sENYHnISBlIzUsJC"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <!-- Adicione mais iframes de vídeos aqui conforme necessário -->
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('change-about').addEventListener('click', function () {
+            const aboutText = document.getElementById('about-text');
+            aboutText.innerText = aboutText.innerText === 'Fiz esse portifólio/blog para centralizar alguns projetos e experiências profissionais'
+                ? 'O meu objetivo é criar e fazer coisas relevantes.:D'
+                : 'Fiz esse portifólio/blog para centralizar alguns projetos e experiências profissionais :D';
+            gravityEnabled = !gravityEnabled;  // Alterna o estado
+            gridHelperY.visible = gravityEnabled;  // Mostra ou oculta a grade Y
+            gridHelperX.visible = gravityEnabled;  // Mostra ou oculta a grade X
+            toggleGravityButton.textContent = gravityEnabled ? 'Desativar Gravidade' : 'Ativar Gravidade';
+            moveCameraTo([42, 60, 12], 2000); // Mover para a posição da Terra em 2 segundos
+            document.getElementById('change-about').style.display = 'none';
+        });
+
+//         document.getElementById('ok-terminal').addEventListener('click', function () {
+//             displayOutput('press enter to use the comand...');
+//         });
+//         document.querySelector('.terminal-container').addEventListener('click', function () {
+//             commandInput.focus();
+//         });
+
+//         const output = document.getElementById('output');
+//         const commandInput = document.getElementById('command-input');
+
+//         commandInput.addEventListener('keypress', function (e) {
+//             if (e.key === 'Enter') {
+//                 const command = commandInput.value.trim();
+//                 displayOutput(`$ ${command}`);
+//                 processCommand(command);
+//                 commandInput.value = '';
+//             }
+//         });
+
+//         function displayOutput(text) {
+//             const line = document.createElement('div');
+//             line.textContent = text;
+//             output.appendChild(line);
+//             output.scrollTop = output.scrollHeight;
+//         }
+
+//         function processCommand(command) {
+//             if (command.startsWith('ping')) {
+//                 simulatePing(command);
+//             } else {
+//                 switch (command) {
+//                     case 'ls':
+//                         displayOutput('Documents  Downloads  Pictures  Desktop');
+//                         break;
+//                     case 'pwd':
+//                         displayOutput('/home/user');
+//                         break;
+//                     case 'echo Hello World':
+//                         displayOutput('Hello World');
+//                         break;
+//                     case 'clear':
+//                         output.innerHTML = '';
+//                         break;
+//                     case 'help':
+//                         displayOutput('Available commands: help, date, whoami, uname -a, df -h, top, cat, clear, mkdir, rmdir, touch, rm, cp, mv, grep, man, shutdown, exit, ping, history');
+//                         break;
+//                     case 'date':
+//                         displayOutput(new Date().toString());
+//                         break;
+//                     case 'whoami':
+//                         displayOutput('user');
+//                         break;
+//                     case 'uname':
+//                         if (args[1] === '-a') {
+//                             displayOutput('Linux localhost 5.4.0-42-generic #46-Ubuntu SMP Mon Aug 31 17:33:15 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux');
+//                         } else {
+//                             displayOutput(`uname: invalid option -- '${args[1]}'`);
+//                         }
+//                         break;
+//                     case 'df':
+//                         if (args[1] === '-h') {
+//                             displayOutput('Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda1       100G   40G   60G  40% /');
+//                         } else {
+//                             displayOutput(`df: invalid option -- '${args[1]}'`);
+//                         }
+//                         break;
+//                     case 'top':
+//                         displayOutput('top - 15:20:38 up 10 days,  1:54,  2 users,  load average: 0.00, 0.00, 0.00\nTasks: 123 total,   0 running, 123 sleeping,   0 stopped,   0 zombie');
+//                         break;
+//                     case 'cat':
+//                         if (args[1] === '/etc/hostname') {
+//                             displayOutput('localhost');
+//                         } else {
+//                             displayOutput(`cat: ${args[1]}: No such file or directory`);
+//                         }
+//                         break;
+//                     case 'clear':
+//                         output.innerHTML = '';
+//                         break;
+//                     case 'mkdir':
+//                         if (args[1]) {
+//                             displayOutput(`mkdir: created directory '${args[1]}'`);
+//                         } else {
+//                             displayOutput(`mkdir: missing operand`);
+//                         }
+//                         break;
+//                     case 'rmdir':
+//                         if (args[1]) {
+//                             displayOutput(`rmdir: removed directory '${args[1]}'`);
+//                         } else {
+//                             displayOutput(`rmdir: missing operand`);
+//                         }
+//                         break;
+//                         case 'ifconfig':
+//             displayOutput(`
+// eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+//         inet 192.168.1.2  netmask 255.255.255.0  broadcast 192.168.1.255
+//         inet6 fe80::a00:27ff:fe34:7c0f  prefixlen 64  scopeid 0x20<link>
+//         ether 08:00:27:34:7c:0f  txqueuelen 1000  (Ethernet)
+//         RX packets 123456 bytes 12345678 (12.3 MB)
+//         TX packets 654321 bytes 87654321 (87.6 MB)
+//             `);
+//             break;
+//                     case 'touch':
+//                         if (args[1]) {
+//                             displayOutput(`touch: created file '${args[1]}'`);
+//                         } else {
+//                             displayOutput(`touch: missing operand`);
+//                         }
+//                         break;
+//                     case 'rm':
+//                         if (args[1]) {
+//                             displayOutput(`rm: removed file '${args[1]}'`);
+//                         } else {
+//                             displayOutput(`rm: missing operand`);
+//                         }
+//                         break;
+//                     case 'cp':
+//                         if (args[1] && args[2]) {
+//                             displayOutput(`cp: copied '${args[1]}' to '${args[2]}'`);
+//                         } else {
+//                             displayOutput(`cp: missing operand`);
+//                         }
+//                         break;
+//                     case 'mv':
+//                         if (args[1] && args[2]) {
+//                             displayOutput(`mv: moved '${args[1]}' to '${args[2]}'`);
+//                         } else {
+//                             displayOutput(`mv: missing operand`);
+//                         }
+//                         break;
+//                     case 'grep':
+//                         if (args[1] && args[2]) {
+//                             displayOutput(`grep: ${args[1]}: No such file or directory`);
+//                         } else {
+//                             displayOutput(`grep: missing operand`);
+//                         }
+//                         break;
+//                     case 'man':
+//                         if (args[1] === 'ls') {
+//                             displayOutput(`ls: list directory contents`);
+//                         } else {
+//                             displayOutput(`man: no manual entry for ${args[1]}`);
+//                         }
+//                         break;
+//                     case 'shutdown':
+//                         displayOutput('Shutdown now? [y/n]');
+//                         break;
+//                     case 'exit':
+//                         displayOutput('Exiting terminal...');
+//                         document.getElementById('terminal').style.display = 'none';
+//                         break;
+//                     case 'history':
+//                         displayOutput('1. ls\n2. pwd\n3. echo Hello World\n4. ping google.com\n5. date');
+//                         break;
+//                     default:
+//                         displayOutput(`Command not found: ${command}`);
+//                 }
+//             }
+//         }
+
+//         function simulatePing(command) {
+//             const target = command.split(' ')[1] || '127.0.0.1';
+//             displayOutput(`PING ${target} (100.64.0.1): 56 data bytes`);
+
+//             let packet = 1;
+//             const interval = setInterval(() => {
+//                 if (packet <= 4) {
+//                     const time = (Math.random() * 100).toFixed(2); // Simulando tempo de resposta em ms
+//                     displayOutput(`64 bytes from ${target}: icmp_seq=${packet} ttl=64 time=${time} ms`);
+//                     packet++;
+//                 } else {
+//                     displayOutput(`--- ${target} ping statistics ---`);
+//                     displayOutput(`4 packets transmitted, 4 received, 0% packet loss`);
+//                     displayOutput(`round-trip min/avg/max = ${(Math.random() * 80 + 10).toFixed(2)}/${(Math.random() * 80 + 20).toFixed(2)}/${(Math.random() * 100 + 30).toFixed(2)} ms`);
+//                     clearInterval(interval);
+//                 }
+//             }, 800); // Intervalo entre cada "resposta" do ping
+//         }
+
+
+
+
+        document.getElementById('home-link').addEventListener('click', function () {
+            // Exibe o conteúdo inicial do portfólio
+            document.getElementById('portfolio-content').style.display = 'flex';
+
+            // Esconde o conteúdo da seção de demonstrações
+            document.getElementById('demo-content').style.display = 'none';
+
+            // Mover a câmera para a posição inicial
+            moveCameraTo([0, 0, 100], 2000);
+        });
+
+        document.getElementById('demo-link').addEventListener('click', function () {
+            moveCameraTo([-40, -20, -30], 2000); // Ajuste a posição da câmera para a seção de ensino
+            // Esconde o conteúdo do portfólio principal
+            document.getElementById('portfolio-content').style.display = 'none';
+
+            // Mostra o conteúdo de demonstrações
+            document.getElementById('demo-content').style.display = 'block';
+        });
+
+        document.getElementById('teach-link').addEventListener('click', function () {
+            // Mudar o conteúdo para a seção de ensinando
+            document.getElementById('portfolio-content').style.display = 'none'; // Esconder o conteúdo atual
+            // Esconde o conteúdo da seção de demonstrações
+            document.getElementById('demo-content').style.display = 'none';
+            // Mover a câmera para a posição de ensino
+            moveCameraTo([70, 40, 30], 2000); // Ajuste a posição da câmera para a seção de ensino
+        });
+
+        document.getElementById('photo-album-link').addEventListener('click', function () {
+            // Mudar o conteúdo para o álbum de fotos
+            document.getElementById('portfolio-content').style.display = 'none'; // Esconder o conteúdo atual
+            // Mover a câmera para a posição do álbum de fotos
+            moveCameraTo([10, 10, 40], 2000); // Ajuste a posição da câmera para o álbum
+        });
+
+        document.getElementById('contact-link').addEventListener('click', function () {
+            // Mudar o conteúdo para a seção de contato
+            document.getElementById('portfolio-content').style.display = 'none'; // Esconder o conteúdo atual
+            // Mover a câmera para a posição de contato
+            moveCameraTo([5, 5, 20], 2000); // Ajuste a posição da câmera para a seção de contato
+        });
+
+
+        function openModal(element) {
+    const modal = document.getElementById("myModal");
+    const modalImage = document.getElementById("modalImage");
+    modal.style.display = "flex"; // Exibe o modal
+    modalImage.src = element.querySelector("img").src; // Define a imagem no modal
+}
+
+function closeModal() {
+    const modal = document.getElementById("myModal");
+    modal.style.display = "none"; // Esconde o modal
+}
+
+// Adiciona um evento de clique fora da imagem para fechar o modal
+window.onclick = function(event) {
+    const modal = document.getElementById("myModal");
+    const modalImage = document.getElementById("modalImage");
+    // Fecha o modal se o clique for fora da imagem ou do botão de fechar
+    if (event.target == modal || event.target.className == 'close') {
+        closeModal();
+    }
+}
+    </script>
+</body>
+
+</html>
