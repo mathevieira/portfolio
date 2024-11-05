@@ -1,35 +1,32 @@
-// Configurações iniciais da cena, câmera e renderizador
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setClearColor(0x000000, 0);  // Fundo transparente
+renderer.setClearColor(0x000000, 0); 
 
-// Adiciona o renderizador ao container
 document.getElementById('planet-container').appendChild(renderer.domElement);
 
-// Controle de rotação
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;  
 controls.dampingFactor = 0.05;  
 controls.enableZoom = true;     
 controls.autoRotate = false;    
 
-// Criação do Sol
+//Sol
 const sunGeometry = new THREE.SphereGeometry(3, 32, 32);
 const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sun);
 
-// Adiciona uma luz que simula a luz solar
+//Luz solar
 const sunLight = new THREE.PointLight(0xffffff, 2);
 sunLight.position.set(0, 0, 0);
 scene.add(sunLight);
 
-// Carregar a textura da Terra
+//Textura da Terra
 const textureLoader = new THREE.TextureLoader();
-const planets = []; // Declara o array de planetas
+const planets = []; 
 
 // Função para criar planetas com textura
 function createPlanet(size, distance, texturePath, speed) {
@@ -38,7 +35,7 @@ function createPlanet(size, distance, texturePath, speed) {
         map: textureLoader.load(texturePath) // Carregue a textura
     });
     const planet = new THREE.Mesh(geometry, material);
-    planet.userData = { distance: distance, speed: speed, angle: 0 };  // Armazena distância e velocidade
+    planet.userData = { distance: distance, speed: speed, angle: 0 };
     scene.add(planet);
     return planet;
 }
@@ -53,37 +50,35 @@ planets.push(createPlanet(1.2, 25, 'img/saturn.png', 0.006)); // Saturno
 planets.push(createPlanet(1, 30, 'img/uranus.png', 0.004)); // Urano
 planets.push(createPlanet(0.9, 35, 'img/neptune.png', 0.002)); // Netuno
 
-// Adiciona luz ambiente para suavizar a aparência
 const ambientLight = new THREE.AmbientLight(0x404040); 
 scene.add(ambientLight);
 
-// Carregar a textura da estrela
-const starTexture = textureLoader.load('circle.png'); // Substitua pelo caminho da sua imagem
+const starTexture = textureLoader.load('circle.png');
 
-// Função para criar uma estrela em uma posição aleatória
+//Função para criar uma estrela
 function createStar() {
-    const starGeometry = new THREE.PlaneGeometry(1, 1); // Tamanho da estrela
-    const starMaterial = new THREE.MeshBasicMaterial({ map: starTexture, transparent: true }); // Usar a textura da estrela
+    const starGeometry = new THREE.PlaneGeometry(1, 1); //Tamanho da estrela
+    const starMaterial = new THREE.MeshBasicMaterial({ map: starTexture, transparent: true }); 
     const star = new THREE.Mesh(starGeometry, starMaterial);
 
-    // Define uma posição aleatória para a estrela
-    star.position.x = Math.random() * 300 - 100; // Ajuste os valores conforme necessário
+    
+    star.position.x = Math.random() * 300 - 100; 
     star.position.y = Math.random() * 300 - 100;
     star.position.z = Math.random() * 300 - 100;
 
-    // Adiciona a estrela à cena
+    
     scene.add(star);
 }
 
-// Adicionar várias estrelas à cena
-const starCount = 200; // Número de estrelas desejadas
+
+const starCount = 200; // Número de estrelas
 for (let i = 0; i < starCount; i++) {
     createStar();
 }
 
-// Criação do plano de grade no eixo Y
-const gridYSize = 100;  // Tamanho da grade no eixo Y
-const gridYDivisions = 10;   // Número de divisões no eixo Y
+
+const gridYSize = 100;  // Tamanho no eixo Y
+const gridYDivisions = 10;   // Número no eixo Y
 
 const gridHelperY = new THREE.GridHelper(gridYSize, gridYDivisions);
 gridHelperY.rotation.x = -Math.PI / 2;  // Rotaciona o plano para ficar horizontal
@@ -91,11 +86,11 @@ scene.add(gridHelperY);
 gridHelperY.visible = false;  // Começa invisível
 
 // Criação do plano de grade no eixo X
-const gridXSize = 100;  // Tamanho da grade no eixo X
-const gridXDivisions = 10;   // Número de divisões no eixo X
+const gridXSize = 100;  
+const gridXDivisions = 10;  
 
 const gridHelperX = new THREE.GridHelper(gridXSize, gridXDivisions);
-gridHelperX.rotation.y = -Math.PI / 2;  // Rotaciona o plano para ficar horizontal
+gridHelperX.rotation.y = -Math.PI / 2; 
 scene.add(gridHelperX);
 gridHelperX.visible = false;  // Começa invisível
 
@@ -105,43 +100,42 @@ let gravityEnabled = false;  // Estado da gravidade
 
 toggleGravityButton.addEventListener('click', () => {
     gravityEnabled = !gravityEnabled;  // Alterna o estado
-    gridHelperY.visible = gravityEnabled;  // Mostra ou oculta a grade Y
-    gridHelperX.visible = gravityEnabled;  // Mostra ou oculta a grade X
+    gridHelperY.visible = gravityEnabled;  
+    gridHelperX.visible = gravityEnabled;  
     toggleGravityButton.textContent = gravityEnabled ? 'Desativar Gravidade' : 'Ativar Gravidade';  // Altera o texto do botão
 });
 
-// Controle de rotação
-const toggleRotationButton = document.getElementById('toggle-rotation');
-let rotationEnabled = true;  // Estado da rotação
 
+const toggleRotationButton = document.getElementById('toggle-rotation');
+let rotationEnabled = true;  
 toggleRotationButton.addEventListener('click', () => {
-    rotationEnabled = !rotationEnabled;  // Alterna o estado
-    toggleRotationButton.textContent = rotationEnabled ? 'Parar Rotação' : 'Iniciar Rotação';  // Altera o texto do botão
+    rotationEnabled = !rotationEnabled; 
+    toggleRotationButton.textContent = rotationEnabled ? 'Parar Rotação' : 'Iniciar Rotação'; 
 });
 
-// Resetar a posição da câmera
+
 const resetCameraButton = document.getElementById('reset-camera');
 
 resetCameraButton.addEventListener('click', () => {
-    camera.position.set(0, 0, 50);  // Reseta a posição da câmera
-    controls.target.set(0, 0, 0);  // Reseta o alvo da câmera
+    camera.position.set(0, 0, 50);  
+    controls.target.set(0, 0, 0);  
     controls.update();
 });
 
 // Posiciona a câmera
 camera.position.z = 50;
 
-// Função para mover a câmera suavemente para uma nova posição
+
 function moveCameraTo(newPosition, duration) {
-    const startPosition = camera.position.clone(); // Posição inicial
-    const endPosition = new THREE.Vector3(...newPosition); // Posição final
-    const startTime = performance.now(); // Marca o tempo de início
+    const startPosition = camera.position.clone(); 
+    const endPosition = new THREE.Vector3(...newPosition); 
+    const startTime = performance.now(); 
 
     function animateCamera() {
-        const elapsedTime = performance.now() - startTime; // Tempo decorrido
-        const progress = Math.min(elapsedTime / duration, 1); // Progresso normalizado (0 a 1)
+        const elapsedTime = performance.now() - startTime; 
+        const progress = Math.min(elapsedTime / duration, 1);
 
-        // Interpolação linear entre a posição inicial e final
+        
         camera.position.lerpVectors(startPosition, endPosition, progress);
 
         // Atualiza a câmera
@@ -153,25 +147,25 @@ function moveCameraTo(newPosition, duration) {
         }
     }
 
-    animateCamera(); // Inicia a animação
+    animateCamera();
 }
 
-// Adiciona o evento ao botão "Ir para a Terra"
+
 document.getElementById('go-to-earth').addEventListener('click', () => {
     moveCameraTo([0, 0, 15], 2000); // Mover para a posição da Terra em 2 segundos
 });
-// Adiciona o evento ao botão "Ir para a Terra"
+
 document.getElementById('go-to-test').addEventListener('click', () => {
-    moveCameraTo([4, 32, 56], 2000); // Mover para a posição da Terra em 2 segundos
+    moveCameraTo([4, 32, 56], 2000); 
 });
 document.getElementById('go-to-test2').addEventListener('click', () => {
-    moveCameraTo([42, 60, 12], 2000); // Mover para a posição da Terra em 2 segundos
+    moveCameraTo([42, 60, 12], 2000);
 });
 
 
 // Controle de velocidade
-let speedMultiplier = 0.2;  // Multiplicador de velocidade inicial
-const speedIncrement = 0.1;  // Incremento/decremento da velocidade
+let speedMultiplier = 0.2;  
+const speedIncrement = 0.1; 
 
 // Botão para aumentar a velocidade
 document.getElementById('increase-speed').addEventListener('click', () => {
@@ -181,15 +175,15 @@ document.getElementById('increase-speed').addEventListener('click', () => {
 
 // Botão para diminuir a velocidade
 document.getElementById('decrease-speed').addEventListener('click', () => {
-    speedMultiplier = Math.max(0, speedMultiplier - speedIncrement);  // Diminui o multiplicador de velocidade, mas não deixa cair abaixo de 0
+    speedMultiplier = Math.max(0, speedMultiplier - speedIncrement);  
     console.log(`Velocidade diminuída para: ${speedMultiplier}`);
 });
 
-// Função de animação
+
 function animate() {
     requestAnimationFrame(animate);
     
-    // Atualiza a órbita dos planetas, se a rotação estiver habilitada
+   
     if (rotationEnabled) {
         planets.forEach(planet => {
             planet.userData.angle += (planet.userData.speed * speedMultiplier);  // Atualiza o ângulo com a velocidade
@@ -198,12 +192,12 @@ function animate() {
         });
     }
 
-    // Atualiza o controle de câmera e renderização
+    
     controls.update();
     renderer.render(scene, camera);
 }
 
-// Inicia a animação
+
 animate();
 
 // Redimensiona a cena quando a janela muda de tamanho
