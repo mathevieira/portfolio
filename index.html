@@ -118,9 +118,9 @@
             aboutText.innerText = aboutText.innerText === 'Fiz esse portfólio/blog para centralizar alguns projetos e experiências profissionais'
                 ? 'O meu objetivo é criar e fazer coisas relevantes.:D'
                 : 'Fiz esse portfólio/blog para centralizar alguns projetos e experiências profissionais :D';
-            gravityEnabled = !gravityEnabled;  // Alterna o estado
-            gridHelperY.visible = gravityEnabled;  // Mostra ou oculta a grade Y
-            gridHelperX.visible = gravityEnabled;  // Mostra ou oculta a grade X
+            gravityEnabled = !gravityEnabled;  
+            gridHelperY.visible = gravityEnabled;  
+            gridHelperX.visible = gravityEnabled;  
             toggleGravityButton.textContent = gravityEnabled ? 'Desativar Gravidade' : 'Ativar Gravidade';
             moveCameraTo([42, 60, 12], 2000); // Mover para a posição da Terra em 2 segundos
             document.getElementById('change-about').style.display = 'none';
@@ -310,54 +310,54 @@
 
 
         document.getElementById('home-link').addEventListener('click', function () {
-            // Exibe o conteúdo inicial do portfólio
+            
             document.getElementById('portfolio-content').style.display = 'flex';
 
-            // Esconde o conteúdo da seção de demonstrações
+            
             document.getElementById('demo-content').style.display = 'none';
 
-            // Mover a câmera para a posição inicial
+            
             moveCameraTo([0, 0, 100], 2000);
         });
 
         document.getElementById('demo-link').addEventListener('click', function () {
-            moveCameraTo([-40, -20, -30], 2000); // Ajuste a posição da câmera para a seção de ensino
-            // Esconde o conteúdo do portfólio principal
+            moveCameraTo([-40, -20, -30], 2000); 
+            
             document.getElementById('portfolio-content').style.display = 'none';
 
-            // Mostra o conteúdo de demonstrações
+      
             document.getElementById('demo-content').style.display = 'block';
         });
 
         document.getElementById('teach-link').addEventListener('click', function () {
-            // Mudar o conteúdo para a seção de ensinando
-            document.getElementById('portfolio-content').style.display = 'none'; // Esconder o conteúdo atual
-            // Esconde o conteúdo da seção de demonstrações
+            
+            document.getElementById('portfolio-content').style.display = 'none';
+            
             document.getElementById('demo-content').style.display = 'none';
-            // Mover a câmera para a posição de ensino
-            moveCameraTo([70, 40, 30], 2000); // Ajuste a posição da câmera para a seção de ensino
+           
+            moveCameraTo([70, 40, 30], 2000); 
         });
 
         document.getElementById('photo-album-link').addEventListener('click', function () {
-            // Mudar o conteúdo para o álbum de fotos
-            document.getElementById('portfolio-content').style.display = 'none'; // Esconder o conteúdo atual
-            // Mover a câmera para a posição do álbum de fotos
-            moveCameraTo([10, 10, 40], 2000); // Ajuste a posição da câmera para o álbum
+            // Mudar o conteúdo 
+            document.getElementById('portfolio-content').style.display = 'none'; 
+            
+            moveCameraTo([10, 10, 40], 2000); 
         });
 
         document.getElementById('contact-link').addEventListener('click', function () {
             // Mudar o conteúdo para a seção de contato
-            document.getElementById('portfolio-content').style.display = 'none'; // Esconder o conteúdo atual
-            // Mover a câmera para a posição de contato
-            moveCameraTo([5, 5, 20], 2000); // Ajuste a posição da câmera para a seção de contato
+            document.getElementById('portfolio-content').style.display = 'none'; 
+           
+            moveCameraTo([5, 5, 20], 2000); 
         });
 
 
         function openModal(element) {
     const modal = document.getElementById("myModal");
     const modalImage = document.getElementById("modalImage");
-    modal.style.display = "flex"; // Exibe o modal
-    modalImage.src = element.querySelector("img").src; // Define a imagem no modal
+    modal.style.display = "flex"; 
+    modalImage.src = element.querySelector("img").src; 
 }
 
 function closeModal() {
@@ -365,11 +365,11 @@ function closeModal() {
     modal.style.display = "none"; // Esconde o modal
 }
 
-// Adiciona um evento de clique fora da imagem para fechar o modal
+// Adiciona um evento de clique 
 window.onclick = function(event) {
     const modal = document.getElementById("myModal");
     const modalImage = document.getElementById("modalImage");
-    // Fecha o modal se o clique for fora da imagem ou do botão de fechar
+   
     if (event.target == modal || event.target.className == 'close') {
         closeModal();
     }
